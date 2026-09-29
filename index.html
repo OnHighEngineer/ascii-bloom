@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ASCII Bloom</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #1b1a1d; /* matches the clip's own background so the edges don't show */
+  }
+  body {
+    height: 100dvh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  video {
+    max-width: 94vw;
+    max-height: 94dvh;
+    display: block;
+  }
+  .header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: env(safe-area-inset-top, 1.5rem);
+    margin-top: 1.5rem;
+    padding: 0 1.5rem;
+    max-width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    pointer-events: none;
+  }
+  .caption {
+    color: rgba(255,255,255,0.92);
+    font-size: clamp(0.85rem, 2.4vw, 1.4rem);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  }
+  .coming-soon {
+    margin-top: 0.6rem;
+    color: rgba(255,255,255,0.75);
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: clamp(0.7rem, 2vw, 1rem);
+  }
+</style>
+</head>
+<body>
+  <video src="assets/black-ascii-ui.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <div class="header">
+    <p class="caption">𝓐 𝓶𝓲𝓵𝓵𝓲𝓸𝓷 𝓭𝓸𝓵𝓵𝓪𝓻𝓼 𝓲𝓼𝓷'𝓽 𝓬𝓸𝓸𝓵. 𝔂𝓸𝓾 𝓴𝓷𝓸𝔀 𝔀𝓱𝓪𝓽'𝓼 𝓬𝓸𝓸𝓵? 𝓐 𝓑𝓘𝓛𝓛𝓘𝓞𝓝 𝓓𝓞𝓛𝓛𝓐𝓡𝓢</p>
+    <p class="coming-soon">Coming&nbsp;Soon</p>
+  </div>
+
+<script>
+(function () {
+  "use strict";
+  var video = document.querySelector("video");
+  // Autoplay with muted video works in nearly all browsers, but if a strict
+  // mobile browser still blocks it, resume on the first tap/click.
+  video.play().catch(function () {
+    var resume = function () {
+      video.play();
+      window.removeEventListener("pointerdown", resume);
+    };
+    window.addEventListener("pointerdown", resume);
+  });
+})();
+</script>
+</body>
+</html>
